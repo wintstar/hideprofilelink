@@ -1,0 +1,7 @@
+services:
+    wintstar.hideprofilelink.listener:
+        class: wintstar\hideprofilelink\event\listener
+        arguments:
+            - '@auth'
+        tags:
+            - { name: event.listener }

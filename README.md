@@ -11,4 +11,4 @@ Authorisations can be granted for groups, users, moderators and administrators "
 There is no ACP module.
 
 ## Installation
-.Unzip the download package, create a directory in .ext/wintstar and add the directory hideprofilelink there.
+Unzip the download package, create a directory in .ext/wintstar, rename main to hideprofilelink and put the directory hideprofilelink into directory wintstar.

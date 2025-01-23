@@ -64,6 +64,11 @@ class listener implements EventSubscriberInterface
 
 				$vars['username_string'] =  '<span' . $colour . ' class="username-coloured">' . $username . '</span>';
 			}
+
+			if ($vars['mode'] == 'profile')
+			{
+				$vars['username_string'] ='';
+			}
 		}
 	}
 }

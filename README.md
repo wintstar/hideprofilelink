@@ -1,9 +1,10 @@
 # phpbb Extension Hide user profile link
 
-Adds permissions to the link in the user profile
-Extension Version: 1.0.0
+Adds permissions to hide the link in the user profile
 
-Requirements: PHP >=7.0.0,<=8.4.0, phpBB >=3.3.0,<3.4.0@dev
+## Requirements:    
+PHP >=7.0.0,<=8.4.0,   
+phpBB >=3.3.0,<3.4.0@dev
 
 Features: This extension adds permissions board-wide to the user profile.
 If the authorisation has not been granted, only the user name is visible. Go to ‘’Permissions‘’ in the ACP.

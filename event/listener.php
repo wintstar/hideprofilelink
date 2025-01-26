@@ -24,15 +24,38 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var \phpbb\language\language */
+	protected $lang;
+
+	/** @var string phpBB root path */
+	protected $phpbb_root_path;
+
+	/** @var string phpEx */
+	protected $php_ext;
+
 	/**
 	 * Constructor
 	 *
 	 * @param \phpbb\auth\auth                   $auth       Authentication object
+	 * @param \phpbb\user                        $user
 	 * @param \phpbb\language\language           $lang
+	 * @param string                             $root_path
+	 * @param string                             $php_ext
 	 */
-	public function __construct(\phpbb\auth\auth $auth)
+	public function __construct(\phpbb\auth\auth $auth,
+		\phpbb\user $user,
+		\phpbb\language\language $lang,
+		$phpbb_root_path,
+		$php_ext)
 	{
 		$this->auth	= $auth;
+		$this->user = $user;
+		$this->lang = $lang;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->php_ext = $php_ext;
 	}
 
 	/**
@@ -42,9 +65,25 @@ class listener implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return array(
-			'core.permissions' 		=> 'core_add_permission',
-			'core.modify_username_string'	=> ['remove_profile_link', 1],
+			'core.user_setup'                        => 'load_language_on_setup',
+			'core.permissions'                       => 'core_add_permission',
+			'core.modify_username_string'            => ['remove_profile_link', 1],
+			'core.memberlist_modify_viewprofile_sql' => ['no_view_profile', 1],
 		);
+	}
+
+	/**
+	 * Load common language files during user setup
+	 */
+	public function load_language_on_setup($event)
+	{
+		$lang_set_ext = $event['lang_set_ext'];
+
+		$lang_set_ext[] = array(
+			'ext_name' => 'wintstar/hideprofilelink',
+			'lang_set' => array('hideprofilelink'),
+		);
+		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
 	public function core_add_permission($event)
@@ -83,5 +122,26 @@ class listener implements EventSubscriberInterface
 
 		//Send it back to the event
 		$event['username_string'] = $username_string;
+	}
+
+	public function no_view_profile($event)
+	{
+		$this->user->add_lang_ext('wintstar/hideprofilelink', 'hideprofilelink');
+
+		$check_page = $this->user->page['query_string'];
+		$userid_page = ($check_page == 'mode=viewprofile&u=' . $event['user_id']) ? true : false;
+		$username_page = ($check_page == 'mode=viewprofile&un=' . $event['username']) ? true : false;
+		$self_user_id = ($event['user_id'] == $this->user->data['user_id']) ? true : false;
+		$self_username = ($event['username'] == $this->user->data['username']) ? true : false;
+		$message = $this->lang->lang('NO_VIEW_USERSPROFILE') . '<br /><br />' . sprintf($this->lang->lang('RETURN_INDEX'), '<a href="' . append_sid("{$this->phpbb_root_path}index.$this->php_ext") . '">', '</a> ');
+
+		meta_refresh(5, append_sid("{$this->phpbb_root_path}index.$this->php_ext"));
+
+		if (($userid_page && !$self_user_id) || ($username_page && !$self_username)) {
+			if (!$this->auth->acl_gets('a_hpl_view_profilelink', 'm_hpl_view_profilelink', 'u_hpl_view_profilelink', $this->user->data['user_id'])) {
+				send_status_line(403, 'Forbidden');
+				trigger_error($message);
+			}
+		}
 	}
 }

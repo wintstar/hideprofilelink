@@ -40,9 +40,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACL_A_HPL_VIEW_PROFILELINK'	=> 'Can see link to profile and profile',
-	'ACL_M_HPL_VIEW_PROFILELINK'	=> 'Can see link to profile and profile',
-	'ACL_U_HPL_VIEW_PROFILELINK'	=> 'Can see link to profile and profile',
+	'NO_VIEW_USERSPROFILE'	=> 'You are not authorised to view profiles.',
 ));
 
 ?>

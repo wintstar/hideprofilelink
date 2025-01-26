@@ -3,5 +3,9 @@ services:
         class: wintstar\hideprofilelink\event\listener
         arguments:
             - '@auth'
+            - '@user'
+            - '@language'
+            - '%core.root_path%'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }

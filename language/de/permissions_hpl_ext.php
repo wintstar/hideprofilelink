@@ -40,9 +40,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACL_A_HPL_VIEW_PROFILELINK'	=> 'Kann Link im Benutzerprofil sehen',
-	'ACL_M_HPL_VIEW_PROFILELINK'	=> 'Kann Link im Benutzerprofil sehen',
-	'ACL_U_HPL_VIEW_PROFILELINK'	=> 'Kann Link im Benutzerprofil sehen',  
+	'ACL_A_HPL_VIEW_PROFILELINK'	=> 'Kann Link zu Profile und das Profile sehen',
+	'ACL_M_HPL_VIEW_PROFILELINK'	=> 'Kann Link zu Profile und das Profile sehen',
+	'ACL_U_HPL_VIEW_PROFILELINK'	=> 'Kann Link zu Profile und das Profile sehen',  
 ));
 
 ?>

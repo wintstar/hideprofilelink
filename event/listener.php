@@ -135,10 +135,10 @@ class listener implements EventSubscriberInterface
 		$self_username = ($event['username'] == $this->user->data['username']) ? true : false;
 		$message = $this->lang->lang('NO_VIEW_USERSPROFILE') . '<br /><br />' . sprintf($this->lang->lang('RETURN_INDEX'), '<a href="' . append_sid("{$this->phpbb_root_path}index.$this->php_ext") . '">', '</a> ');
 
-		meta_refresh(5, append_sid("{$this->phpbb_root_path}index.$this->php_ext"));
+		if (!$this->auth->acl_gets('a_hpl_view_profilelink', 'm_hpl_view_profilelink', 'u_hpl_view_profilelink', $this->user->data['user_id'])) {
+			meta_refresh(5, append_sid("{$this->phpbb_root_path}index.$this->php_ext"));
 
-		if (($userid_page && !$self_user_id) || ($username_page && !$self_username)) {
-			if (!$this->auth->acl_gets('a_hpl_view_profilelink', 'm_hpl_view_profilelink', 'u_hpl_view_profilelink', $this->user->data['user_id'])) {
+			if (($userid_page && !$self_user_id) || ($username_page && !$self_username)) {
 				send_status_line(403, 'Forbidden');
 				trigger_error($message);
 			}

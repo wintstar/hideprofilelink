@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.4 - 2025-01-26
+- Bug, meta refresh
+
 ### 1.0.3 - 2025-01-26
 - New, no view profile
 

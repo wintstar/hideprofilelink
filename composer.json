@@ -1,11 +1,15 @@
 {
     "name": "wintstar/hideprofilelink",
     "type": "phpbb-extension",
-    "description": "Adds permissions to the link in the user profile.",
+    "description": "Adds permissions to the link in the user profile and not view profile.",
     "homepage": "https://www.stephan-frank.de/",
-    "version": "1.0.4",
-    "time": "2025-01-26",
-	"license": "GPL-2.0-only",
+    "version": "1.0.5",
+    "keywords": [
+        "phpbb",
+        "extension",
+        "profile"
+    ],
+    "license": "GPL-2.0-only",
 	"authors": [{
 			"name": "Stephan-Frank",
 			"homepage": "https://www.stephan-frank.de",

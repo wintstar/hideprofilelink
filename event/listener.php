@@ -106,17 +106,39 @@ class listener implements EventSubscriberInterface
 		$username_colour = $event['username_colour'];
 		$username_string = $event['username_string'];
 		$user_id = $event['user_id'];
+		$username = $event['username'];
+		$self_user_id = ($user_id == $this->user->data['user_id']) ? true : false;
 
-		if (!$this->auth->acl_gets('a_hpl_view_profilelink', 'm_hpl_view_profilelink', 'u_hpl_view_profilelink', $user_id)) {
+		if (!$this->auth->acl_gets('a_hpl_view_profilelink', 'm_hpl_view_profilelink', 'u_hpl_view_profilelink', $user_id))
+		{
+			$profile_url = ($event['custom_profile_url'] !== false) ? $event['custom_profile_url'] . '&amp;u=' . (int) $user_id : str_replace(array('={USER_ID}', '=%7BUSER_ID%7D'), '=' . (int) $user_id, $event['_profile_cache']['base_url']);
+			$tpl_profile = "<a href=\"" . $profile_url . "\" class=\"username\">" . $username . "</a>";
+
+
 			if ($mode == 'full')
 			{
-				$username = $event['username'];
-				$username_colour_code = ($username_colour) ? '' . $username_colour : '';
-				$username_string = $username_colour ? "<span style='color: {$username_colour_code};' class='username-coloured'>{$username}</span>" : "<span class='username'>{$username}</span>";
+				if ($self_user_id)
+				{
+					$username_string = $tpl_profile;
+				}
+				else
+				{
+					$username = $event['username'];
+					$username_colour_code = ($username_colour) ? '' . $username_colour : '';
+					$username_string = $username_colour ? "<span style='color: {$username_colour_code};' class='username-coloured'>{$username}</span>" : "<span class='username'>{$username}</span>";
+				}
 			}
-			else if ($mode == 'profile')
+
+			if ($mode == 'profile')
 			{
-				$username_string = '';
+				if ($self_user_id && ($this->user->data['user_id'] != ANONYMOUS))
+				{
+					$username_string = $profile_url;
+				}
+				else
+				{
+					$username_string = "javascript:void(0);";
+				}
 			}
 		}
 
@@ -136,8 +158,6 @@ class listener implements EventSubscriberInterface
 		$message = $this->lang->lang('NO_VIEW_USERSPROFILE') . '<br /><br />' . sprintf($this->lang->lang('RETURN_INDEX'), '<a href="' . append_sid("{$this->phpbb_root_path}index.$this->php_ext") . '">', '</a> ');
 
 		if (!$this->auth->acl_gets('a_hpl_view_profilelink', 'm_hpl_view_profilelink', 'u_hpl_view_profilelink', $this->user->data['user_id'])) {
-			meta_refresh(5, append_sid("{$this->phpbb_root_path}index.$this->php_ext"));
-
 			if (($userid_page && !$self_user_id) || ($username_page && !$self_username)) {
 				send_status_line(403, 'Forbidden');
 				trigger_error($message);

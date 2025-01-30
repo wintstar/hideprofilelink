@@ -3,7 +3,7 @@
     "type": "phpbb-extension",
     "description": "Adds permissions to the link in the user profile and not view profile.",
     "homepage": "https://www.stephan-frank.de/",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "keywords": [
         "phpbb",
         "extension",

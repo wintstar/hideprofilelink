@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package phpBB Extension - wintstar hideprofilelink
+ * @package phpBB Extension - wintstar Hide profile link
  * @author St. Frank <webdesign@stephan-frank.de> https://www.stephan-frank.de
  * @copyright (c) 2024 St.Frank
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2

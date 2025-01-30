@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.6 - 2025-01-30
+- New, instead of the login form appearing when the profile is called up without permission, an warning message appears
+
 ### 1.0.5 - 2025-01-27
 - Bug, own profile link
 

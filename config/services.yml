@@ -5,6 +5,7 @@ services:
             - '@auth'
             - '@user'
             - '@language'
+            - '@request'
             - '%core.root_path%'
             - '%core.php_ext%'
         tags:

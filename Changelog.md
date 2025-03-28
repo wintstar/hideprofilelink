@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.7 - 2025-03-28
+- New, change Css cursor from pointer to default. Set Css pointer-events to none
+
 ### 1.0.6 - 2025-01-30
 - New, instead of the login form appearing when the profile is called up without permission, an warning message appears
 

@@ -10,8 +10,6 @@
 
 namespace wintstar\hideprofilelink\migrations\v10x;
 
-use \phpbb\db\migration\container_aware_migration;
-
 class release_0_0_1 extends \phpbb\db\migration\container_aware_migration
 {
 	public static function depends_on()

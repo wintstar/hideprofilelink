@@ -44,5 +44,3 @@ $lang = array_merge($lang, array(
 	'ACL_M_HPL_VIEW_PROFILELINK'	=> 'Kann Link zu Profile und das Profile sehen',
 	'ACL_U_HPL_VIEW_PROFILELINK'	=> 'Kann Link zu Profile und das Profile sehen',  
 ));
-
-?>

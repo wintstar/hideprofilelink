@@ -158,7 +158,7 @@ class listener implements EventSubscriberInterface
 		$this->user->add_lang_ext('wintstar/hideprofilelink', 'hideprofilelink');
 
 		$view         = true;
-		$member_page  = ($this->user->page[ 'page_name' ] == 'memberlist.' . $this->php_ext) ? true : false;
+		$member_page  = ($this->user->page['page_name'] == 'memberlist.' . $this->php_ext) ? true : false;
 
 		if ($member_page)
 		{

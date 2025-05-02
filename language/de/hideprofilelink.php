@@ -42,5 +42,3 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'NO_VIEW_USERSPROFILE'	=> 'Du bist nicht berechtigt Profile anzusehen.',
 ));
-
-?>

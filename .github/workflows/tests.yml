@@ -26,11 +26,7 @@ jobs:
         strategy:
             matrix:
                 include:
-<<<<<<< Updated upstream
-                    - php: '7.2'
-=======
                     - php: '7.4'
->>>>>>> Stashed changes
                       db: "none"
                       NOTESTS: 1
 

@@ -6,7 +6,7 @@
  * @copyright (c) 2024 St.Frank
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
- * 
+ *
 */
 
 namespace wintstar\hideprofilelink;
